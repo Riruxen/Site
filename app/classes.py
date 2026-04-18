@@ -12,4 +12,4 @@ class User(Base):
     card_number:Mapped[str | None] = mapped_column(String(20))
     card_expiry: Mapped[str | None] = mapped_column(String(5))
     def __repr__(self):
-        return f"{self.id}:{self.name}->{self.text}"
+        return f"{self.id}:{self.name}->"
