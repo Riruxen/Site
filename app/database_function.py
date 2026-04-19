@@ -14,9 +14,9 @@ Base = declarative_base()
 Base.metadata.create_all(engine)
 
 
-def add_db(user,text):#working
+def add_db(user,text,email,card_number,card_expiry):#working
     password = generate_password_hash(text,method="pbkdf2:sha256")
-    person = User(name=user,text=password)
+    person = User(name=user,text=password,email=email,card_number=card_number,card_expiry=card_expiry)
     with Session() as session:
         if session.query(User.id).filter_by(name = user).first() is not None:
             return False
@@ -59,13 +59,19 @@ def readlast():#work
         except:
             return None
 
-def updatedb(name,text,id):#work
+def updatedb(name,text,id,email,card_number,card_expiry):#work
     try:
         values = {}
         if name:
             values["name"] = name
         if text:
             values["text"] = text
+        if email:
+            values["email"] = email
+        if card_number:
+            values["card_number"] = card_number
+        if card_expiry:
+            values["card_expiry"] = card_expiry
         if not values:
             return False
         if id and id > 0:
@@ -76,12 +82,10 @@ def updatedb(name,text,id):#work
             return True
     except:
             return False
-def autoriz_check(name,password):
+def autoriz_check(name,password1):
     with Session() as session:
-            a = check_password_hash(user.text, password)
-            print (a)
             user = session.query(User).where(User.name == name).first()
-            if user and check_password_hash(user.text, password):
+            if user and check_password_hash(user.password, password1):
                 return True
             else:
                 return False
