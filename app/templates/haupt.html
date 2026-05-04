@@ -7,26 +7,55 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
 </head>
 <body>
+    <header>
     <div class="bg-secondary text-white p-5 text-center">
     <img src="{{ url_for('static', filename='images/logo.png') }}" class="img-fluid rounded-circle mb-3" width="40">
     
     <button class="btn btn-primary bg-secondary">Geschichte</button>
     <button class="btn btn-secondary bg-secondary">Über uns</button> 
     <button class="btn btn-success bg-secondary">FAQ</button> 
+    </header>
 </div>
+<main>
 <div class="container my-5">
   <div class="row">
-    <!-- Left Side: Text -->
-    <div class="col-md-6">
-      <h2>Nationalfeiertag</h2>
-      <p class="text-center">Der österreichische Nationalfeiertag wird seit 1965 jährlich am 26. Oktober begangen,
-         dem Tag, an dem der Nationalrat 1955 das Gesetz zur österreichischen Neutralität beschloss.
-          Dieser Gedenktag löste den vormaligen Tag der Fahne als Nationalfeiertag ab.
-           1967 wurde er den übrigen gesetzlichen Feiertagen in Österreich gleichgestellt und ist seither arbeitsfrei.
-            Der Nationalfeiertag ist nicht zu verwechseln mit dem österreichischen Staatsfeiertag am 1. Mai.</p>
+    <div class="col-md-6 d-flex justify-content-center">
+        <div>
+      <h2>Tierschutz festival</h2>
+      <p class="">Das Tierschutz festival ist eine jährliche Veranstaltung, die sich für den Schutz und die Rechte von Tieren einsetzt.
+         Es findet in verschiedenen Städten Österreichs statt und zieht viele Besucher an, die sich für tiergerechte Lebensweise und den Schutz von Tieren interessieren.
+        Wir finden es wichtig, dass jeder Mensch in der Welt eine möglichkeit hat, sich für diesen Tag zu engagieren.
+        Deswegen möchten wir Sie einladen, um unsere Festival zu besuchen!</p>
+        </div>
     </div>
     <div class="col-md-6">
-        <img src="{{ url_for('static', filename='images/Feiertag.jpeg') }}" class="img-fluid rounded" alt="Nationalfeiertag Bild">
+        <img src="{{ url_for('static', filename='images/Hundsitz.jpg') }}" class="img-fluid rounded" alt="Tierschutz festival Bild">
     </div>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+        <img src="{{ url_for('static', filename='images/Katze.avif') }}" class="img-fluid rounded" alt="Tierschutz festival Bild">
+    </div>
+    <div class="col-md-6 ">
+        <h2 >Wo werden unser Festival stattfinden?</h2>
+        <p>Usere Festival wirn in jeder große Städten in Österreichs
+            Hier unter können sie die Adresse in diesen Städten finden.
+            
+            <div class="btn-group-horizontal d-flex justify-content-center">
+                <button class="btn btn-primary bg-blue">Wien</button>
+                <button class="btn btn-primary bg-blue">Linz</button>
+                <button class="btn btn-primary bg-blue">Salzburg</button>
+                <button class="btn btn-primary bg-blue">Graz</button>
+                <button class="btn btn-primary bg-blue">Inssbruck</button>
+            </div>
+        </p>
+    </div>
+</main>
+   <footer class="mt-auto py-3 bg-dark text-white text-center">
+    <div class="container">
+      <span>Footer content - Not sticky, scrolls normally.</span>
+    </div>
+  </footer>
+</body>
 
 </html>
