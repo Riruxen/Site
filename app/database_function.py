@@ -1,19 +1,15 @@
 import os
 import sqlalchemy as db
-from app.classes import User
+
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import delete, update
 from werkzeug.security import generate_password_hash, check_password_hash
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-db_path= os.path.join(basedir, "Users.db")
-engine = db.create_engine(f"sqlite:///{db_path}")
-Session = sessionmaker(bind=engine)
-Base = declarative_base()
+from create_db import engine, Session, Base
+from classes import User
 Base.metadata.create_all(engine)
-
-
+session = Session
 def add_db(user,text,email,card_number,card_expiry):#working
     password = generate_password_hash(text,method="pbkdf2:sha256")
     person = User(name=user,text=password,email=email,card_number=card_number,card_expiry=card_expiry)
