@@ -1,13 +1,10 @@
-import os
-import sqlalchemy as db
-
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import delete, update
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from create_db import engine, Session, Base
 from classes import User
+
+
+
 Base.metadata.create_all(engine)
 session = Session
 def add_db(user,text,email,card_number,card_expiry):#working
