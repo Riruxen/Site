@@ -9,13 +9,18 @@
 <body>
     <header>
     <div class="bg-secondary text-white p-5 text-center">
+
+        <div class="btn-group-horizontal d-flex justify-content-end">
+        <a href="{{url_for('rout.registration')}}" class="btn bg-dark text-white">Registration</a>
+      </div>
     <img src="{{ url_for('static', filename='images/logo.png') }}" class="img-fluid rounded-circle mb-3 mx-auto" width="60" alt="logo">
     
     <a href="{{ url_for('rout.geschichte') }}" class="btn btn-primary bg-green">Geschichte</a>
     <a href="{{ url_for('rout.über') }}" class="btn btn-secondary bg-green">Über uns</a> 
     <a href="{{ url_for('rout.faq') }}" class="btn btn-success bg-green">FAQ</a> 
+    </div>
     </header>
-</div>
+
 <main>
 <div class="container my-5">
   <div class="row">

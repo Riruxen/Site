@@ -1,15 +1,15 @@
 from sqlalchemy import delete, update
 from werkzeug.security import generate_password_hash, check_password_hash
-from create_db import engine, Session, Base
-from classes import User , Ticket
+from app.create_db import engine, Session, Base
+from app.classes import User , Ticket
 
 
 
 Base.metadata.create_all(engine)
 session = Session
-def add_db(user,text,email,card_number,card_expiry):#working
+def add_db(user,text,email):#working
     password = generate_password_hash(text,method="pbkdf2:sha256")
-    person = User(name=user,text=password,email=email,card_number=card_number,card_expiry=card_expiry)
+    person = User(name=user,password=password,email=email)
     with Session() as session:
         if session.query(User.id).filter_by(name = user).first() is not None:
             return False
