@@ -34,7 +34,9 @@ def über():
 @rout.route("/faq")
 def faq():
     return render_template("haupt.html")
-
+@rout.route('/registration')
+def registration():
+    return render_template('registration.html')
 @rout.route("/add", methods= ["POST"])
 def add():
     user = request.form.get("exampleInputname")
@@ -51,6 +53,3 @@ def add():
     else:
         flash("Please enter something to add!")
         return redirect(url_for("rout.show"))
-@rout.route('/registration')
-def registration():
-    return render_template('registration.html')
