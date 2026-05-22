@@ -14,7 +14,7 @@ def wien():
     return render_template("wien.html")
 @rout.route("/linz")
 def linz():
-    return render_template("haupt.html")
+    return render_template("linz.html")
 @rout.route("/salzburg")
 def salzburg():
     return render_template("salzburg.html")
@@ -29,7 +29,7 @@ def geschichte():
     return render_template("haupt.html")
 
 @rout.route("/uber")
-def über():
+def uber():
     return render_template("haupt.html")
 @rout.route("/faq")
 def faq():
