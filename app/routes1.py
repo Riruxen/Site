@@ -37,6 +37,9 @@ def faq():
 @rout.route('/registration')
 def registration():
     return render_template('registration.html')
+@rout.route("/login_prev")
+def login_prev():
+    return render_template("login.html")
 @rout.route("/add", methods= ["POST"])
 def add():
     user = request.form.get("exampleInputname")
