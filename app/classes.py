@@ -1,8 +1,9 @@
 from sqlalchemy import String,ForeignKey
 from sqlalchemy.orm import Mapped,mapped_column, relationship
 from sqlalchemy.ext.declarative import declarative_base
-from create_db import Base
-class User(Base):
+from flask_login import UserMixin 
+from app.create_db import Base
+class User(Base,UserMixin):
     __tablename__='user'
 
     id:Mapped[int] = mapped_column(primary_key=True) 
@@ -11,7 +12,7 @@ class User(Base):
     email:Mapped[str] = mapped_column(unique=True)
     card_number:Mapped[str | None] = mapped_column(String(20))
     card_expiry: Mapped[str | None] = mapped_column(String(5))
-    buyed_tickets: Mapped[list['Ticket']]= relationship('owner')
+    buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner')
     def __repr__(self):
         return f"{self.id}:{self.name}->"
 
