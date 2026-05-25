@@ -1,7 +1,19 @@
-from  flask import redirect, url_for, render_template,request,flash, Blueprint
+from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask, current_app
 rout= Blueprint("rout",__name__,url_prefix="/")
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check#
+from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email
+from app.classes import User
+from app import login_manager 
+
+@login_manager.user_loader
+def load_user(user_id):
+    check_usr= read1_db(int(user_id))
+    if check_usr:
+        return check_usr
+        
+    return None
+
+
 
 @rout.route("/")
 def show():
@@ -40,6 +52,26 @@ def registration():
 @rout.route("/login_prev")
 def login_prev():
     return render_template("login.html")
+@rout.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('rout.haupt'))
+@rout.route('/login', methods = ["POST"])
+def login():
+    email = request.form.get("login_email")
+    password =request.form.get('login_password')
+
+    login_check = autoriz_check(email,password)
+    if login_check:
+            check_usr= read1_db_email(email)
+            if check_usr:
+                login_user(check_usr)
+                return redirect(url_for('rout.haupt'))
+            
+    else:
+        flash ("there is some problem")
+        return render_template('login.html')
+
 @rout.route("/add", methods= ["POST"])
 def add():
     user = request.form.get("exampleInputname")

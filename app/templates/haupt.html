@@ -9,7 +9,15 @@
 <body>
     <header>
     <div class="bg-secondary text-white p-5 text-center">
-
+        <div class="text-start">
+            {% if current_user.is_authenticated %}
+        <h1>Welcome back, {{ current_user.name }}!</h1>
+        <a href="{{ url_for('rout.logout') }}">Logout</a>
+    {% else %}
+        <h1>Welcome, Guest!</h1>
+        <a href="{{ url_for('rout.login') }}">Login</a>
+    {% endif %}
+        </div>
         <div class="btn-group-horizontal d-flex justify-content-end">
         <a href="{{url_for('rout.registration')}}" class="btn bg-dark text-white">Registration</a>
         <a href="{{url_for('rout.login_prev')}}" class="btn bg-dark text-white">login</a>

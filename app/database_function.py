@@ -34,6 +34,13 @@ def read1_db(id):# working!
             return find
         else:
             return "Error"
+def read1_db_email(email):# working!
+    with Session() as session:
+        find = session.query(User).where(User.email == email).first()
+        if find:
+            return find
+        else:
+            return "Error"
 def readall():#working
     try:
         with Session() as session:
@@ -77,7 +84,7 @@ def updatedb(name,text,id,email,card_number,card_expiry):
             return False
 def autoriz_check(name,password1):
     with Session() as session:
-            user = session.query(User).where(User.name == name).first()
+            user = session.query(User).where(User.email == name).first()
             if user and check_password_hash(user.password, password1):
                 return True
             else:
