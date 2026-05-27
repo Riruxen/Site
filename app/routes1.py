@@ -42,10 +42,10 @@ def geschichte():
 
 @rout.route("/uber")
 def uber():
-    return render_template("haupt.html")
+    return render_template("uber_unt.html")
 @rout.route("/faq")
 def faq():
-    return render_template("haupt.html")
+    return render_template("faq.html")
 @rout.route('/registration')
 def registration():
     return render_template('registration.html')
