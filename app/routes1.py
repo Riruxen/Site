@@ -38,7 +38,7 @@ def inssbruck():
     return render_template("inssbruck.html")
 @rout.route("/geschichte")
 def geschichte():
-    return render_template("haupt.html")
+    return render_template('geschichte.html')
 
 @rout.route("/uber")
 def uber():
@@ -49,6 +49,7 @@ def faq():
 @rout.route('/registration')
 def registration():
     return render_template('registration.html')
+
 @rout.route("/login_prev")
 def login_prev():
     return render_template("login.html")

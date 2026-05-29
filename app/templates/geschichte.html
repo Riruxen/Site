@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+</head>
+<body>
+    <header>
+      
+    <div class="bg-dark text-white p-5 text-center">
+      <div class="btn-group-horizontal d-flex justify-content-left">
+        <a href="{{url_for('rout.show')}}" class="btn bg-dark text-white"> <--Züruck</a>
+      </div>
+      
+     <img src="{{ url_for('static', filename='images/logo.png') }}" class="img-fluid rounded-circle mb-3 mx-auto" width="60" alt="logo">
+    <a href="{{ url_for('rout.geschichte') }}" class="btn  bg-secondary text-white">Geschichte</a>
+    <a href="{{ url_for('rout.uber') }}" class="btn  bg-secondary text-white">Über uns</a> 
+    <a href="{{ url_for('rout.faq') }}" class="btn  bg-secondary text-white">FAQ</a> 
+    </header>
+</div>
+
+<main>
+    <div class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+        <img src="{{ url_for('static', filename='images/Sun_god_Ra.svg.png') }}" class="img-fluid rounded" alt="Tierschutz festival Bild">
+    </div>
+    <div class="col-md-6 d-flex justify-content-center">
+        <div>
+      <h2 class = 'text-center'>Historische Hintergründe des Tierschutzes</h2>        
+      <p>Als Tierschutz werden alle Aktivitäten des Menschen bezeichnet, die darauf abzielen, Tieren (meist Wirbeltieren) ein artgerechtes Leben zu ermöglichen und Leiden, Schmerzen, Schäden sowie unnötige Beeinträchtigungen zu reduzieren beziehungsweise zu verhindern. Im Unterschied zu den Verfechtern von Tierrechten, die teilweise jegliche Nutzhaltung von Tieren durch den Menschen ablehnen, liegt im Tierschutzrecht und seinen zugehörigen Regelungen der Schwerpunkt auf der sach- und artgerechten Haltung, Umgang mit und Nutzung von Tieren durch den Menschen.</p>
+      <p class="">
+        In den frühen Kulturen der Menschheit (beispielsweise im Alten Ägypten) und bei sogenannten Naturvölkern findet man eine mehr oder weniger ausgeprägte Tierverehrung. So waren die alten Ägypter sich beispielsweise über die gemeinsame Herkunft von Tier und Mensch in der Schöpfung bewusst. Dies drückte sich auch in ihrer Götterdarstellung aus: Die meisten ägyptischen Götter wurden mit Menschenkörpern und Tierköpfen dargestellt.</p>
+        <P>
+            In asiatischen Religionen wie Hinduismus, Jainismus und Buddhismus haben bestimmte Tiere, insbesondere bezüglich des Reinkarnationsgedankens, eine besondere Stellung. So gelten in diesem Zusammenhang im Hinduismus die Kühe als unantastbar. Und da der Mensch unter Umständen als Tier wiedergeboren werden kann, spielt dort die Verkörperung der menschlichen Seele in einem Tier eine sehr prägende Rolle. Im Jainismus geht der Tierschutzgedanke so weit, dass alle seine Glaubensanhänger vegan leben.
+        </P>
+        <p>Wie für das Judentum gelten auch für das Christentum die Aussagen des Alten Testaments. Ein Unterschied besteht jedoch darin, dass Christus das Tieropfer abgeschafft und durch das Opfer von Wein und Brot ersetzt hat. Einzelne Theologen haben dies als Form von Verantwortungsethik verstanden. Der württembergische, vom Pietismus geprägte Pfarrer Christian Adam Dann begründete seinen Einsatz für die gequälten Tiere damit, dass sie die Mitgeschöpfe der Menschen seien und als solche ebenso von Gott geliebt. Ein Mensch, der Tiere quäle, könne Gott und seine Mitmenschen nicht lieben. Er bezog sich dabei unter anderem auf Spr 12,10 LUT: „Der Gerechte erbarmt sich seines Viehs, aber das Herz der Gottlosen ist unbarmherzig“. Sein Freund, der Liederdichter und Pfarrer Albert Knapp, gründete wenige Monate nach Danns Tod einen der ersten Tierschutzvereine Deutschlands.[2]
+
+        </p>
+        </div>
+    </div>
+
+    
+</main>
+
+
+
+   <footer class="mt-auto py-3 bg-dark text-white text-center">
+    <div class="container">
+        <div class="text-center ">
+        <span>Österreichiche Tierschutze Gruppe</span>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
