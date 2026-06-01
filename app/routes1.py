@@ -57,17 +57,20 @@ def login_prev():
 def logout():
     logout_user()
     return redirect(url_for('rout.haupt'))
-@rout.route('/login', methods = ["POST"])
+@rout.route('/login', methods = ["POST", "GET"])
 def login():
-    email = request.form.get("login_email")
-    password =request.form.get('login_password')
+    if request.method == "GET":
+        return render_template('login.html')
+    if request.method == "POST":
+        email = request.form.get("login_email")
+        password =request.form.get('login_password')
 
-    login_check = autoriz_check(email,password)
-    if login_check:
-            check_usr= read1_db_email(email)
-            if check_usr:
-                login_user(check_usr)
-                return redirect(url_for('rout.haupt'))
+        login_check = autoriz_check(email,password)
+        if login_check:
+                check_usr= read1_db_email(email)
+                if check_usr:
+                    login_user(check_usr)
+                    return redirect(url_for('rout.haupt'))
             
     else:
         flash ("there is some problem")
@@ -89,3 +92,8 @@ def add():
     else:
         flash("Please enter something to add!")
         return redirect(url_for("rout.show"))
+@rout.route('/profile')
+@login_required
+def profile():
+
+        return render_template("profile.html")
