@@ -18,39 +18,28 @@
     <a href="{{ url_for('rout.geschichte') }}" class="btn  bg-secondary text-white">Geschichte</a>
     <a href="{{ url_for('rout.uber') }}" class="btn  bg-secondary text-white">Über uns</a> 
     <a href="{{ url_for('rout.faq') }}" class="btn  bg-secondary text-white">FAQ</a> 
-    </div>
     </header>
 </div>
-<main>
-<div class="container my-5">
-  <div class="row">
-    <div class="d-flex justify-content-center">
-        <div>      
-      <h1>
-        Welcome {{ current_user.name }} !
-      </h1>
+
+ <form action="/stadt_wehlen" method="POST">
+      
+      <div class="mb-4">
+        <label for="townSelect" class="form-label fw-bold">Stadt</label>
+        
+        <select class="form-select" id="townSelect" name="town" required>
+          <option value="" selected disabled>Wählen sie die Stadt</option>
+          <option value="vienna">Wien</option>
+          <option value="graz">Graz</option>
+          <option value="linz">Linz</option>
+        </select>
       </div>
-      <div class="text-start">
-        <h1>Your email, {{ current_user.email }}!</h1>
-        <div class="text-white p-5 text-center">
-            {% if tickets %}
-              <ul class="list-unstyled text-start w-100 m-0">
-                {% for ticket in tickets %}
-                  <li class="border-bottom border-secondary py-1">
-                    ID: <strong>{{ ticket.uniqe_id }}</strong> ({{ ticket.place }})
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <p class="text-muted m-0">You don't have any tickets yet.</p>
-            {% endif %}
-    </div>
-        </div>
-    </div>
+
+      <button type="submit" class="btn btn-primary w-100">Confirnm</button>
+    </form>
   </div>
+</div>
 
 
-</main>
 
    <footer class="mt-auto py-3 bg-dark text-white text-center">
     <div class="container">
@@ -59,6 +48,4 @@
       </div>
     </div>
   </footer>
-</body>
-
 </html>

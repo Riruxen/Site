@@ -1,9 +1,10 @@
 from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask, current_app
 rout= Blueprint("rout",__name__,url_prefix="/")
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email
+from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,get_user_tickets
 from app.classes import User
 from app import login_manager 
+import uuid
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -97,3 +98,19 @@ def add():
 def profile():
 
         return render_template("profile.html")
+@rout.route('/ticket')
+@login_required
+def ticket():
+    user_id_int = current_user.id
+    tik = get_user_tickets(user_id_int)
+    for t in tik:
+        print(t)
+    return render_template('ticket_kaufen.html', tickets = tik)
+@rout.route('stadt_wehlen', methods=["POST"])
+@login_required
+def stadt_wehlen():
+    uniqeid = uuid.uuid1().int %1000000
+    stadt= request.form.get('town')
+    ticket_add_db(stadt,uniqeid)
+    return redirect(url_for('rout.profile'))
+

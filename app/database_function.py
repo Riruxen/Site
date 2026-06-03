@@ -1,7 +1,8 @@
-from sqlalchemy import delete, update
+from sqlalchemy import delete, update, select
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.create_db import engine, Session, Base
 from app.classes import User , Ticket
+from flask_login import current_user
 
 
 
@@ -90,7 +91,7 @@ def autoriz_check(name,password1):
             else:
                 return False
 def ticket_add_db(place,uniqe_id):#working
-    person_ticket = Ticket(place = place, uniqe_id=uniqe_id)
+    person_ticket = Ticket(user_id = current_user.id ,place = place, uniqe_id=uniqe_id)
     with Session() as session:
         if session.query(Ticket.ticket_id).filter_by(uniqe_id = uniqe_id).first() is not None:
             return False
@@ -150,3 +151,8 @@ def ticket_updatedb(place,uniqe_id):
             return True
     except:
             return False
+def get_user_tickets(user_id):
+    with Session() as session:
+        stmt = select(Ticket).where(Ticket.user_id == user_id)
+
+        return session.execute(stmt).scalars().all

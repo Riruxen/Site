@@ -10,8 +10,6 @@ class User(Base,UserMixin):
     name:Mapped[str] = mapped_column(unique=True)
     password:Mapped[str] = mapped_column(String(255), nullable=False)
     email:Mapped[str] = mapped_column(unique=True)
-    card_number:Mapped[str | None] = mapped_column(String(20))
-    card_expiry: Mapped[str | None] = mapped_column(String(5))
     buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner')
     def __repr__(self):
         return f"{self.id}:{self.name}->"
