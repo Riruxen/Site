@@ -111,7 +111,7 @@ def ticket_delete_db(id):#50/50
             return False
 def ticket_read1_db(id):# working!
     with Session() as session:
-        find_ticket = session.query(Ticket).where(Ticket.ticket_id == id).first()
+        find_ticket = session.query(Ticket).where(Ticket.user_id == id).first()
         if find_ticket:
             return find_ticket
         else:
@@ -155,4 +155,4 @@ def get_user_tickets(user_id):
     with Session() as session:
         stmt = select(Ticket).where(Ticket.user_id == user_id)
 
-        return session.execute(stmt).scalars().all
+        return session.execute(stmt).scalars().all()

@@ -32,7 +32,8 @@
       </div>
       <div class="text-start">
         <h1>Your email, {{ current_user.email }}!</h1>
-        <div class="text-white p-5 text-center">
+        <h1>Your email, {{ current_user.id }}!</h1>
+        <div class="text-dark p-5 text-center">
             {% if tickets %}
               <ul class="list-unstyled text-start w-100 m-0">
                 {% for ticket in tickets %}
