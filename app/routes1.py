@@ -43,7 +43,7 @@ def geschichte():
 
 @rout.route("/uber")
 def uber():
-    return render_template("uber_unt.html")
+    return render_template("uber_uns.html")
 @rout.route("/faq")
 def faq():
     return render_template("faq.html")
