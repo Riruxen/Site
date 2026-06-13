@@ -60,7 +60,7 @@ def readlast():#work
         except:
             return None
 
-def updatedb(name,text,id,email,card_number,card_expiry):
+def updatedb(name,text,id,email):
     try:
         values = {}
         if name:
@@ -69,10 +69,6 @@ def updatedb(name,text,id,email,card_number,card_expiry):
             values["text"] = text
         if email:
             values["email"] = email
-        if card_number:
-            values["card_number"] = card_number
-        if card_expiry:
-            values["card_expiry"] = card_expiry
         if not values:
             return False
         if id and id > 0:

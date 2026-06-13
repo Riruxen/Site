@@ -1,6 +1,6 @@
-from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask, current_app, g
+from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask
 rout= Blueprint("rout",__name__,url_prefix="/")
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets
 from app.classes import User
 from app import login_manager 
