@@ -33,4 +33,4 @@ python -m venv venv
    pip install -r requirements.txt
 ```
 4. **Run the app**
-Just laucnh the python app.py file
+Just launch the python app.py file
