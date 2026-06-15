@@ -66,7 +66,8 @@ def updatedb(name,text,id,email):
         if name:
             values["name"] = name
         if text:
-            values["text"] = text
+            password = generate_password_hash(text,method="pbkdf2:sha256")
+            values["password"] = password
         if email:
             values["email"] = email
         if not values:
@@ -86,6 +87,11 @@ def autoriz_check(name,password1):
                 return True
             else:
                 return False
+def check_admin():
+    if current_user.email=="admin@123.com":
+        return True
+    else:
+        return False
 def ticket_add_db(place,uniqe_id):#working
     person_ticket = Ticket(user_id = current_user.id ,place = place, uniqe_id=uniqe_id)
     with Session() as session:

@@ -1,7 +1,7 @@
 from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask
 rout= Blueprint("rout",__name__,url_prefix="/")
 from flask_login import login_user, logout_user, login_required, current_user
-from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets
+from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets,check_admin
 from app.classes import User
 from app import login_manager 
 import uuid
@@ -19,6 +19,48 @@ def load_user(user_id):
 @rout.route("/")
 def show():
     return redirect("/haupt_tierschutz")
+
+@rout.route("admin_panel")
+@login_required
+def admin():
+    if check_admin:
+        return render_template('admin_panel.html')
+    else:
+        return redirect(url_for('rout.haupt'))
+
+@rout.route("/delete_admin",methods = ["POST"])
+@login_required
+def delete_admin():
+    print(current_user.email)
+    if check_admin():
+        id_delete = request.form.get('id')
+        delete_db(id_delete)
+        flash ("Deleted")
+        return render_template('admin_panel.html')
+    else:
+        flash("issue")
+        return render_template('admin_panel.html')
+
+@rout.route("/update_admin",methods = ["POST"])
+@login_required
+def update_admin():
+    if check_admin():
+        name_update = request.form.get('name')
+        email_update = request.form.get('email')
+        password_update = request.form.get('password')
+        id_update = request.form.get('id')
+        updatedb(name_update,password_update,id_update,email_update)
+        flash ("update successful")
+        return redirect(url_for('rout.admin_panel'))
+@rout.route("/find_admin",methods = ["POST"])
+@login_required
+def find_admin():
+    if check_admin():
+        find = request.form.get('id')
+        read1_db(find)
+        flash ("Found one")
+        return redirect(url_for('rout.admin_panel'))
+
 @rout.route("/haupt_tierschutz")
 def haupt():
     return render_template("haupt.html")
