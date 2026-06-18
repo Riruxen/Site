@@ -10,7 +10,7 @@ class User(Base,UserMixin):
     name:Mapped[str] = mapped_column(unique=True)
     password:Mapped[str] = mapped_column(String(255), nullable=False)
     email:Mapped[str] = mapped_column(unique=True)
-    buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner')
+    buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner', cascade='all, delete-orphan', passive_deletes=True)
     def __repr__(self):
         return f"{self.id}:{self.name}->"
 
@@ -18,7 +18,7 @@ class Ticket(Base):
     __tablename__='tickets'
 
     ticket_id:Mapped[int] = mapped_column(primary_key=True)
-    user_id:Mapped[int] = mapped_column(ForeignKey("user.id"))
+    user_id:Mapped[int] = mapped_column(ForeignKey("user.id",ondelete="CASCADE"))
     place:Mapped[str] = mapped_column()
     uniqe_id:Mapped[int] = mapped_column(unique=True)
     owner:Mapped[User] = relationship(back_populates='buyed_tickets')

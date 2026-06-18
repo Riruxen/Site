@@ -20,10 +20,9 @@ def add_db(user,text,email):#working
             return True
 def delete_db(id):#50/50
     with Session() as session:
-        if session.query(User.id).filter_by(id=id).first():
-
-            stm= delete(User).where(User.id == id)
-            session.execute(stm)
+        user = session.get(User,id)
+        if user:
+            session.delete(user)
             session.commit()
             return True
         else:
