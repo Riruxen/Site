@@ -20,6 +20,9 @@
     <a href="{{ url_for('rout.faq') }}" class="btn  bg-secondary text-white">FAQ</a> 
     </header>
 <body>
+     {%if read_one%}
+      <p>{{read_one}}</p>
+    {%endif%}
     <a href="/registration">make a new user</a>
     <a href="/login">login</a>
     <form action="/add" method="post">
@@ -43,7 +46,9 @@
                     <p>{{message}}</p>
         {%endfor%}
         {%endif%}
+
         {%endwith%}
+            
     </form>
     <form action="/delete_admin" method="post">
         <label for="id">Please enter id here</label>

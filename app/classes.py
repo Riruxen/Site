@@ -10,9 +10,9 @@ class User(Base,UserMixin):
     name:Mapped[str] = mapped_column(unique=True)
     password:Mapped[str] = mapped_column(String(255), nullable=False)
     email:Mapped[str] = mapped_column(unique=True)
-    buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner', cascade='all, delete-orphan', passive_deletes=True)
+    buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner', cascade='all, delete-orphan', passive_deletes=True,lazy="selectin")
     def __repr__(self):
-        return f"{self.id}:{self.name}->"
+        return f"{self.id}:{self.name}->{self.password}:{self.email}"
 
 class Ticket(Base):
     __tablename__='tickets'

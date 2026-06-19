@@ -49,9 +49,6 @@ def update_admin():
         email_update = request.form.get('email')
         password_update = request.form.get('password')
         id_update = int(request.form.get('id'))
-        a = {name_update,email_update,password_update,id_update}
-        for i in a:
-            print (i)
         if updatedb(name_update,password_update,id_update,email_update):
             flash ("update successful")
             return redirect(url_for('rout.admin'))
@@ -62,10 +59,15 @@ def update_admin():
 @login_required
 def find_admin():
     if check_admin():
-        find = request.form.get('id')
-        read1_db(find)
-        flash ("Found one")
-        return redirect(url_for('rout.admin_panel'))
+        find = request.form.get('idon')
+        one_user = read1_db(find)
+        if one_user:
+            print(one_user)
+            flash ("Found one")
+            return render_template('admin_panel.html', read_one = one_user)
+        else:
+            flash ("no such user")
+            return render_template('admin_panel.html')
 
 @rout.route("/haupt_tierschutz")
 def haupt():
