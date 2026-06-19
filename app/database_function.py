@@ -1,4 +1,5 @@
 from sqlalchemy import delete, update, select
+from  flask import flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.create_db import engine, Session, Base
 from app.classes import User , Ticket
@@ -60,7 +61,6 @@ def readlast():#work
             return None
 
 def updatedb(name,text,id,email):
-    try:
         values = {}
         if name:
             values["name"] = name
@@ -70,14 +70,17 @@ def updatedb(name,text,id,email):
         if email:
             values["email"] = email
         if not values:
+            flash('no values!')
             return False
         if id and id > 0:
-            with Session() as session:
-                up = update(User).where(User.id == id).values(**values)
-                session.execute(up)
-                session.commit()
-            return True
-    except:
+                with Session() as session:
+                    up = update(User).where(User.id == id).values(**values)
+                    session.execute(up)
+                    session.commit()
+                return True
+        else:
+
+            flash('problem!')
             return False
 def autoriz_check(name,password1):
     with Session() as session:

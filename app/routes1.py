@@ -48,10 +48,16 @@ def update_admin():
         name_update = request.form.get('name')
         email_update = request.form.get('email')
         password_update = request.form.get('password')
-        id_update = request.form.get('id')
-        updatedb(name_update,password_update,id_update,email_update)
-        flash ("update successful")
-        return redirect(url_for('rout.admin_panel'))
+        id_update = int(request.form.get('id'))
+        a = {name_update,email_update,password_update,id_update}
+        for i in a:
+            print (i)
+        if updatedb(name_update,password_update,id_update,email_update):
+            flash ("update successful")
+            return redirect(url_for('rout.admin'))
+        else:
+            flash("issue")
+            return render_template('admin_panel.html')
 @rout.route("/find_admin",methods = ["POST"])
 @login_required
 def find_admin():
@@ -78,7 +84,7 @@ def graz():
     return render_template("graz.html")
 @rout.route("/inssbruck")
 def inssbruck():
-    return render_template("inssbruck.html")
+    return render_template("innsbruck.html")
 @rout.route("/geschichte")
 def geschichte():
     return render_template('geschichte.html')
@@ -156,4 +162,3 @@ def stadt_wehlen():
     stadt= request.form.get('town')
     ticket_add_db(stadt,uniqeid)
     return redirect(url_for('rout.profile'))
-
