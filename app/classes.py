@@ -12,7 +12,7 @@ class User(Base,UserMixin):
     email:Mapped[str] = mapped_column(unique=True)
     buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner', cascade='all, delete-orphan', passive_deletes=True,lazy="selectin")
     def __repr__(self):
-        return f"{self.id}:{self.name}->{self.password}:{self.email}"
+        return f"Id:{self.id}:Name:{self.name}->Password:{self.password}:Email:{self.email}"
 
 class Ticket(Base):
     __tablename__='tickets'
@@ -22,3 +22,6 @@ class Ticket(Base):
     place:Mapped[str] = mapped_column()
     uniqe_id:Mapped[int] = mapped_column(unique=True)
     owner:Mapped[User] = relationship(back_populates='buyed_tickets')
+    def __repr__(self):
+            return f"Id:{self.ticket_id}:Name:{self.user_id}->Password:{self.place}:Email:{self.uniqe_id}"
+    

@@ -25,7 +25,6 @@
     {%endif%}
     <a href="/registration">make a new user</a>
     <a href="/login">login</a>
-    <a href="/admin_panel_tickets">Admin panel for Tickets</a>
     <form action="/add" method="post">
 <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
@@ -51,23 +50,23 @@
         {%endwith%}
             
     </form>
-    <form action="/delete_admin" method="post">
-        <label for="id">Please enter id here</label>
+    <form action="/delete_admin_tickets" method="post">
+        <label for="id">Please enter uniqe id here</label>
         <input type = "number" id="name" name="id"><br><br>
         <input type="submit" value="delete_admin">
     </form>
-        <form action="/update_admin" method="post">
-        <label for="name">Please enter your name here</label>
-        <input type = "Text" id="name" name="name"><br><br>
-        <label for="password">Please enter your message here</label>
-        <input type = "Text" id="password" name="password"><br><br>
-          <label for="email">Please enter your email here</label>
-        <input type = "Text" id="email" name="email"><br><br>
+        <form action="/update_admin_tickets" method="post">
+        <select class="form-select" id="townSelect" name="town" required>
+          <option value="" selected disabled>Wählen sie die Stadt</option>
+          <option value="vienna">Wien</option>
+          <option value="graz">Graz</option>
+          <option value="linz">Linz</option>
+        </select>
         <label for="id">Please enter id here</label>
         <input type = "number" id="id" name="id"><br><br>
         <input type="submit" value="update_admin">
      </form>
-        <form action="/find_admin" method="post">
+        <form action="/find_admin_tickets" method="post">
         <label for="idon">Please enter id here</label>
         <input type = "number" id="name" name="idon"><br><br>
         <input type="submit" value="find_admin">

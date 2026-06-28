@@ -105,9 +105,9 @@ def ticket_add_db(place,uniqe_id):#working
             return True
 def ticket_delete_db(id):#50/50
     with Session() as session:
-        if session.query(Ticket.ticket_id).filter_by(ticket_id=id).first():
+        if session.query(Ticket.uniqe_id).filter_by(uniqe_id=id).first():
 
-            delete_ticket= delete(Ticket).where(Ticket.ticket_id == id)
+            delete_ticket= delete(Ticket).where(Ticket.uniqe_id == id)
             session.execute(delete_ticket)
             session.commit()
             return True
@@ -115,7 +115,7 @@ def ticket_delete_db(id):#50/50
             return False
 def ticket_read1_db(id):# working!
     with Session() as session:
-        find_ticket = session.query(Ticket).where(Ticket.user_id == id).first()
+        find_ticket = session.query(Ticket).where(Ticket.uniqe_id == id).first()
         if find_ticket:
             return find_ticket
         else:
@@ -149,7 +149,7 @@ def ticket_updatedb(place,uniqe_id):
             return False
         if uniqe_id and uniqe_id > 0:
             with Session() as session:
-                up = update(Ticket).where(Ticket.uniqe_id == id).values(**values)
+                up = update(Ticket).where(Ticket.uniqe_id == uniqe_id).values(**values)
                 session.execute(up)
                 session.commit()
             return True

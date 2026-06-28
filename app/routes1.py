@@ -1,7 +1,7 @@
 from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask
 rout= Blueprint("rout",__name__,url_prefix="/")
 from flask_login import login_user, logout_user, login_required, current_user
-from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets,check_admin
+from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets,check_admin,ticket_delete_db,ticket_updatedb
 from app.classes import User
 from app import login_manager 
 import uuid
@@ -27,6 +27,7 @@ def admin():
         return render_template('admin_panel.html')
     else:
         return redirect(url_for('rout.haupt'))
+
 
 @rout.route("/delete_admin",methods = ["POST"])
 @login_required
@@ -68,6 +69,50 @@ def find_admin():
         else:
             flash ("no such user")
             return render_template('admin_panel.html')
+@rout.route("admin_panel_tickets")
+@login_required
+def admin_tickets():
+    if check_admin:
+        return render_template('admin_panel_tickets.html')
+    else:
+        return redirect(url_for('rout.haupt'))
+@rout.route("/delete_admin_tickets",methods = ["POST"])
+@login_required
+def delete_admin_tickets():
+    if check_admin():
+        id_delete = request.form.get('id')
+        if ticket_delete_db(id_delete):
+            flash ("Deleted")
+            return render_template('admin_panel_tickets.html')
+    else:
+        flash("issue")
+        return render_template('admin_panel_tickets.html')
+@rout.route("/update_admin_tickets",methods = ["POST"])
+@login_required
+def update_admin_tickets():
+    if check_admin():
+        place_delete = request.form.get('town')
+        print(place_delete)
+        id_update = int(request.form.get('id'))
+        if ticket_updatedb(place_delete,id_update):
+            flash ("update successful")
+            return redirect(url_for('rout.admin_tickets'))
+        else:
+            flash("issue")
+            return render_template('admin_panel_tickets.html')
+@rout.route("/find_admin_tickets",methods = ["POST"])
+@login_required
+def find_admin_tickets():
+    if check_admin():
+        find = request.form.get('idon')
+        one_user = ticket_read1_db(find)
+        if one_user:
+            print(one_user)
+            flash ("Found one")
+            return render_template('admin_panel_tickets.html', read_one = one_user)
+        else:
+            flash ("no such user")
+            return render_template('admin_panel_tickets.html')
 
 @rout.route("/haupt_tierschutz")
 def haupt():
@@ -90,7 +135,6 @@ def inssbruck():
 @rout.route("/geschichte")
 def geschichte():
     return render_template('geschichte.html')
-
 @rout.route("/uber")
 def uber():
     return render_template("uber_uns.html")
