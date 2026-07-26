@@ -9,6 +9,15 @@ from flask_login import current_user
 
 Base.metadata.create_all(engine)
 session = Session
+def create_admin(user ,email, password):
+    with Session() as session:
+            if session.query(User.id).filter_by(email = email).first() is not None:
+                return False
+            else:
+                user = User(name = user ,email = email, password = generate_password_hash(password), is_admin = True)
+                session.add(user)
+                session.commit()
+                return True
 def add_db(user,text,email):#working
     password = generate_password_hash(text,method="pbkdf2:sha256")
     person = User(name=user,password=password,email=email)

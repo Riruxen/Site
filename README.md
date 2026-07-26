@@ -37,6 +37,7 @@ Just launch the python app.py file
 
 ## How to access admin panel
 
-1. Create user with admin email: admin@123.com
-2. Write to the address admin_panel
+1. In terminal write a command ""create-admin""
+2. Create a admin account
+3. Then write in search bar a admin_panel
 

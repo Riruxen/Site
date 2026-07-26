@@ -1,11 +1,13 @@
 from  flask import redirect, url_for, render_template,request,flash, Blueprint, Flask
 rout= Blueprint("rout",__name__,url_prefix="/")
 from flask_login import login_user, logout_user, login_required, current_user
-from app.database_function import add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets,check_admin,ticket_delete_db,ticket_updatedb
+from app.database_function import create_admin,add_db,read1_db,readall,readlast,delete_db,updatedb,autoriz_check,read1_db_email,ticket_add_db,ticket_read1_db,get_user_tickets,check_admin,ticket_delete_db,ticket_updatedb
 from app.classes import User
-from app import login_manager 
+from flask import abort
+from app import login_manager
+from functools import wraps
 import uuid
-
+app = Flask(__name__)
 @login_manager.user_loader
 def load_user(user_id):
     check_usr= read1_db(int(user_id))
@@ -13,20 +15,35 @@ def load_user(user_id):
         return check_usr
         
     return None
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args,**kwargs):
+        if not current_user.is_authenticated or not current_user.is_admin:
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
 
+@app.cli.command('create-admin')
+def create_admin_command():
+    user = input("User name ")
+    email = input("Admin email ")
+    password = input("Password ")
+    succes = create_admin(user,email,password)
+    if succes:
 
-
+        print(f'{email} is now admin')
+    else:
+        print(f'some problem was there')
+    
 @rout.route("/")
 def show():
     return redirect("/haupt_tierschutz")
 
-@rout.route("admin_panel")
+@rout.route("/admin_panel")
 @login_required
+@admin_required
 def admin():
-    if check_admin:
-        return render_template('admin_panel.html')
-    else:
-        return redirect(url_for('rout.haupt'))
+    return render_template('admin_panel.html')
 
 
 @rout.route("/delete_admin",methods = ["POST"])
@@ -69,15 +86,19 @@ def find_admin():
         else:
             flash ("no such user")
             return render_template('admin_panel.html')
-@rout.route("admin_panel_tickets")
+
+        
+@rout.route("/admin_panel_tickets")
 @login_required
 def admin_tickets():
     if check_admin:
         return render_template('admin_panel_tickets.html')
     else:
         return redirect(url_for('rout.haupt'))
+
 @rout.route("/delete_admin_tickets",methods = ["POST"])
 @login_required
+@admin_required
 def delete_admin_tickets():
     if check_admin():
         id_delete = request.form.get('id')

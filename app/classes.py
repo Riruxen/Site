@@ -11,6 +11,7 @@ class User(Base,UserMixin):
     password:Mapped[str] = mapped_column(String(255), nullable=False)
     email:Mapped[str] = mapped_column(unique=True)
     buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner', cascade='all, delete-orphan', passive_deletes=True,lazy="selectin")
+    is_admin:Mapped[bool] = mapped_column(default=False,nullable=False)
     def __repr__(self):
         return f"Id:{self.id}:Name:{self.name}->Password:{self.password}:Email:{self.email}"
 
@@ -23,5 +24,5 @@ class Ticket(Base):
     uniqe_id:Mapped[int] = mapped_column(unique=True)
     owner:Mapped[User] = relationship(back_populates='buyed_tickets')
     def __repr__(self):
-            return f"Id:{self.ticket_id}:Name:{self.user_id}->Password:{self.place}:Email:{self.uniqe_id}"
+            return f"Id:{self.ticket_id}:user_id:{self.user_id}->Place:{self.place}:Uniqe_id:{self.uniqe_id}"
     
