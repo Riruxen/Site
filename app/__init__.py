@@ -11,10 +11,15 @@ def create():
     from app.routes1 import rout
     @app.cli.command('create-admin')
     def create_admin_command():
-        email = input("Admin email")
-        password = input("Password")
-        create_admin(email,password)
-        print(f'{email} is now admin')
+        user = input("User name ")
+        email = input("Admin email ")
+        password = input("Password ")
+        succes = create_admin(user,email,password)
+        if succes:
+
+            print(f'{email} is now admin')
+        else:
+            print(f'some problem was there')
     
     app.register_blueprint(rout)
     return app

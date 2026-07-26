@@ -37,7 +37,13 @@ Just launch the python app.py file
 
 ## How to access admin panel
 
-1. In terminal write a command ""create-admin""
+1. In terminal write a command 
+```bash
+create-admin
+```
 2. Create a admin account
-3. Then write in search bar a admin_panel
+3. Login with a admin acoount 
+3. Open the search bar and search for:
+
+admin_panel
 

@@ -22,18 +22,6 @@ def admin_required(f):
             abort(403)
         return f(*args, **kwargs)
     return decorated_function
-
-@app.cli.command('create-admin')
-def create_admin_command():
-    user = input("User name ")
-    email = input("Admin email ")
-    password = input("Password ")
-    succes = create_admin(user,email,password)
-    if succes:
-
-        print(f'{email} is now admin')
-    else:
-        print(f'some problem was there')
     
 @rout.route("/")
 def show():
@@ -152,7 +140,7 @@ def graz():
     return render_template("graz.html")
 @rout.route("/inssbruck")
 def inssbruck():
-    return render_template("innsbruck.html")
+    return render_template("inssbruck.html")
 @rout.route("/geschichte")
 def geschichte():
     return render_template('geschichte.html')
@@ -222,7 +210,7 @@ def profile():
 def ticket():
     
     return render_template('ticket_kaufen.html')
-@rout.route('stadt_wehlen', methods=["POST"])
+@rout.route('/stadt_wehlen', methods=["POST"])
 @login_required
 def stadt_wehlen():
     uniqeid = uuid.uuid1().int %1000000
