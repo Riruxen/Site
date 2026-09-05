@@ -13,7 +13,7 @@ class User(Base,UserMixin):
     buyed_tickets: Mapped[list['Ticket']]= relationship(back_populates='owner', cascade='all, delete-orphan', passive_deletes=True,lazy="selectin")
     is_admin:Mapped[bool] = mapped_column(default=False,nullable=False)
     def __repr__(self):
-        return f"Id:{self.id}:Name:{self.name}->Password:{self.password}:Email:{self.email}"
+        return f"Id:{self.id}:Name:{self.name}:Email:{self.email}"
 
 class Ticket(Base):
     __tablename__='tickets'
