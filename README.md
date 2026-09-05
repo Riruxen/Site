@@ -39,7 +39,7 @@ Just launch the python app.py file
 
 1. In terminal write a command 
 ```bash
-create-admin
+flask --app app:create create-admin
 ```
 2. Create a admin account
 3. Login with a admin acoount 
