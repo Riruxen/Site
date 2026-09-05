@@ -43,14 +43,14 @@ def read1_db(id):# working!
         if find:
             return find
         else:
-            return "Error"
+            return False
 def read1_db_email(email):# working!
     with Session() as session:
         find = session.query(User).where(User.email == email).first()
         if find:
             return find
         else:
-            return "Error"
+            return False
 def readall():#working
     try:
         with Session() as session:
@@ -98,11 +98,6 @@ def autoriz_check(name,password1):
                 return True
             else:
                 return False
-def check_admin():
-    if current_user.email=="admin@123.com":
-        return True
-    else:
-        return False
 def ticket_add_db(place,uniqe_id):#working
     person_ticket = Ticket(user_id = current_user.id ,place = place, uniqe_id=uniqe_id)
     with Session() as session:
