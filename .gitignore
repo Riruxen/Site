@@ -2,3 +2,4 @@
 .venv/
 app/seite/
 app/Users.db
+app/.env

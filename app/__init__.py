@@ -1,13 +1,17 @@
 from flask import Flask
-from flask_login import LoginManager, UserMixin, login_user, login_required
+from flask_login import LoginManager
 from app.database_function import create_admin
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 login_manager = LoginManager()
 def create():
     app=Flask(__name__)
+    app.secret_key = os.getenv('secret_key')
     login_manager.init_app(app)
     login_manager.login_view = 'rout.login'
-    app.secret_key = "GeeksForGeeks"
-    app.login_manager = login_manager 
     from app.routes1 import rout
     @app.cli.command('create-admin')
     def create_admin_command():
@@ -16,7 +20,6 @@ def create():
         password = input("Password ")
         succes = create_admin(user,email,password)
         if succes:
-
             print(f'{email} is now admin')
         else:
             print(f'some problem was there')
